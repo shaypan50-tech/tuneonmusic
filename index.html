@@ -45,7 +45,6 @@
             100% { transform: rotate(720deg); }
         }
 
-        /* === НИЖНЯЯ ПАНЕЛЬ === */
         .bottom-bar {
             position: fixed;
             bottom: 15px;
@@ -117,7 +116,31 @@
             border-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* === ДОПОЛНИТЕЛЬНАЯ ПАНЕЛЬ === */
+        .tooltip {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            padding: 10px 20px;
+            font-size: 15px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform, opacity;
+        }
+        .tooltip::before {
+            display: none;
+        }
+        .tooltip.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .extra-panel {
             width: 100%;
             max-height: 0;
@@ -134,7 +157,6 @@
             border-radius: 12px;
             box-sizing: border-box;
             margin-top: 0;
-            min-width: 0;
         }
         .bottom-bar.active .extra-panel {
             max-height: 300px;
@@ -153,6 +175,9 @@
             font-size: 14px;
             line-height: 1.5;
             letter-spacing: 0.2px;
+        }
+        .highlight {
+            color: #9900FF; /* фиолетовый */
         }
 
         .extra-actions {
@@ -174,18 +199,18 @@
             height: 40px;
             border-radius: 10px;
             text-decoration: none;
-            transition: opacity 0.2s ease;
-            border: none;
+            border: 1px solid transparent;
             cursor: pointer;
             flex: 1;
             min-width: 0;
+            transition: background 0.25s ease, 
+                        border-color 0.25s ease,
+                        color 0.25s ease;
         }
         .telegram-btn:hover {
-            opacity: 0.85;
-        }
-        .telegram-btn i {
-            font-size: 18px;
-            color: #fff;
+            background: #1a7ab0;
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
         }
 
         .close-btn {
@@ -208,40 +233,9 @@
             border-color: rgba(229, 62, 62, 0.3);
         }
 
-        /* === ПОДСКАЗКА === */
-        .tooltip {
-            position: absolute;
-            left: calc(100% + 14px);
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            color: rgba(255, 255, 255, 0.85);
-            padding: 10px 20px;
-            font-size: 15px;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            pointer-events: none;
-            z-index: 10;
-        }
-        .tooltip::before { display: none; }
-        .tooltip.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* === АДАПТИВ === */
         @media (max-width: 480px) {
-            .bottom-bar {
-                bottom: 10px;
-            }
-            .top-row {
-                gap: 6px;
-            }
+            .bottom-bar { bottom: 10px; }
+            .top-row { gap: 6px; }
             .message-box {
                 height: 38px;
                 padding: 0 14px;
@@ -251,48 +245,15 @@
                 white-space: normal;
                 max-width: 70%;
             }
-            .warning-icon {
-                font-size: 18px;
-            }
-            .info-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 17px;
-                border-radius: 8px;
-            }
-            .extra-panel {
-                padding: 0 14px;
-                border-radius: 8px;
-            }
-            .bottom-bar.active .extra-panel {
-                padding: 14px 14px;
-                max-height: 350px;
-                margin-top: 6px;
-            }
-            .extra-text {
-                font-size: 13px;
-            }
-            .telegram-btn {
-                font-size: 12px;
-                padding: 0 14px;
-                height: 34px;
-                border-radius: 8px;
-            }
-            .telegram-btn i {
-                font-size: 16px;
-            }
-            .close-btn {
-                width: 34px;
-                height: 34px;
-                font-size: 16px;
-                border-radius: 8px;
-            }
-            .tooltip {
-                font-size: 12px;
-                padding: 6px 12px;
-                left: calc(100% + 8px);
-                border-radius: 8px;
-            }
+            .warning-icon { font-size: 18px; }
+            .info-btn { width: 38px; height: 38px; font-size: 17px; border-radius: 8px; }
+            .extra-panel { padding: 0 14px; border-radius: 8px; }
+            .bottom-bar.active .extra-panel { padding: 14px 14px; max-height: 350px; margin-top: 6px; }
+            .extra-text { font-size: 13px; }
+            .telegram-btn { font-size: 12px; padding: 0 14px; height: 34px; border-radius: 8px; }
+            .telegram-btn i { font-size: 16px; }
+            .close-btn { width: 34px; height: 34px; font-size: 16px; border-radius: 8px; }
+            .tooltip { font-size: 12px; padding: 6px 12px; border-radius: 8px; }
         }
     </style>
 </head>
@@ -308,17 +269,16 @@
             <button class="info-btn" id="infoBtn">
                 <i class="fas fa-circle-info"></i>
             </button>
-            <div class="tooltip" id="tooltip">Раскрыть информацию.</div>
         </div>
 
         <div class="extra-panel" id="extraPanel">
             <div class="extra-content">
                 <div class="extra-text">
-                    Дополнительную информацию о разработке нашего музыкального проекта вы сможете найти у нас в Telegram канале.
+                    Дополнительную информацию о разработке <span class="highlight">tuneon.fun</span> вы сможете найти у нас в Telegram канале.
                 </div>
                 <div class="extra-actions">
-                    <a href="https://t.me/nnmusicsite" class="telegram-btn" target="_blank">
-                        <i class="fab fa-telegram-plane"></i> TG: Channel
+                    <a href="https://t.me/tuneon_fun" class="telegram-btn" target="_blank">
+                        <i class="fab fa-telegram-plane"></i> <span>TG: Channel</span>
                     </a>
                     <button class="close-btn" id="closeExtra">
                         <i class="fas fa-times"></i>
@@ -328,26 +288,10 @@
         </div>
     </div>
 
+    <div class="tooltip" id="tooltip">Раскрыть информацию.</div>
+
     <script>
         (function() {
-            // === ПОЛНЫЙ ЗАПРЕТ НА СОХРАНЕНИЕ COOKIE ===
-            // 1. Удаляем все существующие cookie
-            document.cookie.split(';').forEach(function(c) {
-                document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
-            });
-
-            // 2. Блокируем запись новых cookie через document.cookie
-            Object.defineProperty(document, 'cookie', {
-                get: function() { return ''; },
-                set: function(value) {
-                    console.warn('Установка cookie заблокирована на этой странице');
-                },
-                configurable: false
-            });
-
-            console.log('Cookie полностью заблокированы на этой странице.');
-
-            // === ОСНОВНАЯ ЛОГИКА ===
             const infoBtn = document.getElementById('infoBtn');
             const closeBtn = document.getElementById('closeExtra');
             const bottomBar = document.getElementById('bottomBar');
@@ -358,26 +302,28 @@
             let timer = null;
             let isOpen = false;
 
-            // ---- Синхронизация ширины панели с верхним рядом ----
             function syncWidth() {
                 if (topRow && extraPanel) {
-                    const width = topRow.offsetWidth;
-                    extraPanel.style.width = width + 'px';
+                    extraPanel.style.width = topRow.offsetWidth + 'px';
                 }
             }
-
             window.addEventListener('load', syncWidth);
             window.addEventListener('resize', syncWidth);
 
-            // ---- Подсказка при наведении (через 2 секунды) ----
+            function updateTooltipPosition() {
+                if (!infoBtn || !tooltip) return;
+                const rect = infoBtn.getBoundingClientRect();
+                tooltip.style.left = (rect.right + 14) + 'px';
+                tooltip.style.top = (rect.top + rect.height / 2) + 'px';
+                tooltip.style.transform = 'translateY(-50%)';
+            }
+
             function showTooltip() {
+                updateTooltipPosition();
                 tooltip.classList.add('show');
             }
             function hideTooltip() {
-                if (timer) {
-                    clearTimeout(timer);
-                    timer = null;
-                }
+                if (timer) { clearTimeout(timer); timer = null; }
                 tooltip.classList.remove('show');
             }
 
@@ -386,7 +332,13 @@
             });
             infoBtn.addEventListener('mouseleave', hideTooltip);
 
-            // ---- Переключение панели (открыть/закрыть) ----
+            window.addEventListener('resize', () => {
+                if (tooltip.classList.contains('show')) updateTooltipPosition();
+            });
+            window.addEventListener('scroll', () => {
+                if (tooltip.classList.contains('show')) updateTooltipPosition();
+            });
+
             function togglePanel(open) {
                 if (open === undefined) {
                     isOpen = !isOpen;
@@ -395,31 +347,28 @@
                 }
                 if (isOpen) {
                     bottomBar.classList.add('active');
-                    syncWidth();           // обновляем ширину при открытии
+                    syncWidth();
                     hideTooltip();
                 } else {
                     bottomBar.classList.remove('active');
                 }
             }
 
-            // Клик по кнопке Info
             infoBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 togglePanel();
             });
 
-            // Клик по крестику
             closeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 if (isOpen) togglePanel(false);
             });
 
-            // При ресайзе, если панель открыта, обновляем ширину
             window.addEventListener('resize', () => {
-                if (isOpen) {
-                    syncWidth();
-                }
+                if (isOpen) syncWidth();
             });
+
+            document.addEventListener('DOMContentLoaded', updateTooltipPosition);
         })();
     </script>
 </body>
