@@ -290,6 +290,37 @@
     <div class="tooltip" id="tooltip">Раскрыть информацию.</div>
 
     <script>
+        // БЛОКИРОВКА COOKIE: удаляем все существующие и запрещаем создание новых
+        (function blockCookies() {
+            // 1. Удаляем все текущие куки
+            document.cookie.split(';').forEach(function(c) {
+                if (c.trim()) {
+                    const name = c.split('=')[0].trim();
+                    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=' + window.location.hostname;
+                    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+                }
+            });
+
+            // 2. Переопределяем установку cookie через Object.defineProperty
+            // Запоминаем оригинальный метод (чтобы не вызывать рекурсию)
+            const originalCookieDescriptor = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie');
+            Object.defineProperty(document, 'cookie', {
+                get: function() {
+                    // Возвращаем пустую строку, чтобы скрыть существующие куки (если они всё же были установлены)
+                    return '';
+                },
+                set: function(value) {
+                    // Ничего не делаем, просто игнорируем запись
+                    // Можно также вывести предупреждение в консоль:
+                    // console.warn('Установка cookie заблокирована:', value);
+                    return;
+                },
+                configurable: true,
+                enumerable: true
+            });
+        })();
+
+        // ---- Остальной скрипт (без изменений) ----
         (function() {
             const infoBtn = document.getElementById('infoBtn');
             const closeBtn = document.getElementById('closeExtra');
