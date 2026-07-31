@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Динамичная загрузка</title>
+    <title>tuneon | Платформа где ты сможешь послушать музыку</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -176,9 +176,6 @@
             line-height: 1.5;
             letter-spacing: 0.2px;
         }
-        .highlight {
-            color: #9900FF; /* фиолетовый */
-        }
 
         .extra-actions {
             display: flex;
@@ -186,6 +183,7 @@
             gap: 10px;
         }
 
+        /* === ИСПРАВЛЕННАЯ КНОПКА TELEGRAM === */
         .telegram-btn {
             display: inline-flex;
             align-items: center;
@@ -203,14 +201,11 @@
             cursor: pointer;
             flex: 1;
             min-width: 0;
-            transition: background 0.25s ease, 
-                        border-color 0.25s ease,
-                        color 0.25s ease;
+            transition: background 0.25s ease, border-color 0.25s ease;
         }
         .telegram-btn:hover {
-            background: #1a7ab0;
-            border-color: rgba(255, 255, 255, 0.4);
-            color: #ffffff;
+            background: #1a7ab0;                /* темнее */
+            border-color: rgba(255, 255, 255, 0.5); /* белая обводка */
         }
 
         .close-btn {
@@ -274,10 +269,10 @@
         <div class="extra-panel" id="extraPanel">
             <div class="extra-content">
                 <div class="extra-text">
-                    Дополнительную информацию о разработке <span class="highlight">tuneon.fun</span> вы сможете найти у нас в Telegram канале.
+                    Дополнительную информацию о разработке нашего музыкального проекта вы сможете найти у нас в Telegram канале.
                 </div>
                 <div class="extra-actions">
-                    <a href="https://t.me/tuneon_fun" class="telegram-btn" target="_blank">
+                    <a href="https://t.me/nnmusicsite" class="telegram-btn" target="_blank">
                         <i class="fab fa-telegram-plane"></i> <span>TG: Channel</span>
                     </a>
                     <button class="close-btn" id="closeExtra">
@@ -288,6 +283,7 @@
         </div>
     </div>
 
+    <!-- Подсказка вынесена отдельно для fixed-позиционирования -->
     <div class="tooltip" id="tooltip">Раскрыть информацию.</div>
 
     <script>
