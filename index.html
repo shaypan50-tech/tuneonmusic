@@ -2,18 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>TATARSTAN FAMILY · RMRP</title>
-    <!-- Favicon -->
-    <link rel="icon" href="ico.png" type="image/png">
-    <!-- Шрифты и иконки -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Динамичная загрузка</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <style>
         * {
             margin: 0;
@@ -22,938 +13,414 @@
         }
 
         body {
-            background: #030305;
-            background-image: 
-                radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.01) 0%, transparent 50%),
-                repeating-linear-gradient(45deg, rgba(255,255,255,0.005) 0px, rgba(255,255,255,0.005) 1px, transparent 1px, transparent 12px);
+            background-color: #0D0D0D;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             min-height: 100vh;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: clamp(15px, 4vw, 30px) 16px 0;
+            font-family: system-ui, -apple-system, sans-serif;
         }
 
-        /* ===== DYNAMIC ISLAND ===== */
-        .dynamic-island {
-            max-width: min(1000px, 90vw);
-            width: 100%;
-            background: rgba(8, 10, 15, 0.7);
-            backdrop-filter: blur(24px) saturate(200%);
-            -webkit-backdrop-filter: blur(24px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 100px;
-            padding: clamp(6px, 2vw, 8px) clamp(12px, 3vw, 20px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 30px 50px -20px black, 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
-            transition: box-shadow 0.3s ease, border-color 0.2s;
-            z-index: 10;
-        }
-
-        .dynamic-island:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 35px 55px -20px #000, 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            flex-shrink: 1;
-            min-width: 0;
-            cursor: pointer;
-        }
-        .logo a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .logo a:hover {
-            opacity: 0.8;
-        }
-        .logo img {
-            height: clamp(28px, 6vw, 34px);
-            width: auto;
-            max-width: min(170px, 30vw);
-            object-fit: contain;
-            border-radius: 12px;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
-        }
-
-        .nav-links {
-            display: flex;
-            gap: clamp(4px, 1.5vw, 6px);
-            align-items: center;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 4px;
-            border-radius: 70px;
-            backdrop-filter: blur(8px);
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .separator {
-            width: 1px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            margin: 0 4px;
-        }
-
-        .nav-btn {
-            position: relative;
-            background: transparent;
-            border: none;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: clamp(14px, 3.5vw, 16px);
-            font-weight: 500;
-            cursor: pointer;
-            padding: clamp(5px, 2vw, 8px) clamp(10px, 3vw, 16px);
-            border-radius: 60px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.25s, color 0.25s, transform 0.15s, padding 0.2s;
-            white-space: nowrap;
-            border: 1px solid transparent;
-            letter-spacing: 0.2px;
-            line-height: 1.2;
-        }
-
-        .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.1);
-            transform: scale(1.02);
-        }
-
-        .btn-text {
-            display: flex;
-            align-items: center;
-            gap: 0;
-        }
-
-        .short-text,
-        .full-text {
-            white-space: nowrap;
-            transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                        opacity 0.25s ease,
-                        padding 0.2s ease;
-        }
-
-        .short-text {
-            opacity: 1;
-            max-width: 60px;
-            overflow: hidden;
-            display: inline-block;
-        }
-
-        .full-text {
+        .loader-ring {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2.4px solid transparent;
+            border-top-color: rgba(255, 255, 255, 0.95);
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+            will-change: transform, opacity;
             opacity: 0;
-            max-width: 0;
-            overflow: hidden;
-            display: inline-block;
-        }
-
-        .nav-btn:hover .short-text {
-            opacity: 0;
-            max-width: 0;
-            padding-right: 0;
-        }
-
-        .nav-btn:hover .full-text {
-            opacity: 1;
-            max-width: 200px;
-            padding-left: 4px;
-        }
-
-        .nav-btn.regular {
-            background: rgba(255, 255, 255, 0.02);
-        }
-        .nav-btn.regular:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-        .nav-btn.regular .btn-text {
-            display: inline-block;
-        }
-
-        .discord-btn {
-            background: #5865F2;
-            border: none;
-            border-radius: 60px;
-            padding: clamp(8px, 2vw, 10px) clamp(16px, 4vw, 26px);
-            color: white;
-            font-size: clamp(14px, 3.5vw, 16px);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: clamp(6px, 1.5vw, 10px);
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
-            white-space: nowrap;
-            letter-spacing: 0.3px;
-            box-shadow: 0 8px 18px rgba(88, 101, 242, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            flex-shrink: 0;
-        }
-
-        .discord-btn i {
-            font-size: clamp(18px, 4vw, 22px);
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-        }
-
-        .discord-btn:hover {
-            background-color: #4752c4;
-            transform: scale(1.02) translateY(-1px);
-            box-shadow: 0 14px 24px -6px #5865F2;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-            padding: 0 10px;
-            line-height: 1;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: absolute;
-            top: calc(100% + 10px);
-            right: 0;
-            background: rgba(15, 17, 22, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 16px;
-            min-width: 220px;
-            flex-direction: column;
-            gap: 8px;
-            box-shadow: 0 20px 30px -10px black;
-            z-index: 100;
-        }
-
-        .mobile-menu.show {
-            display: flex;
-        }
-
-        .mobile-menu .nav-btn {
-            width: 100%;
-            justify-content: flex-start;
-            padding: 12px 16px;
-            font-size: 16px;
-        }
-
-        .mobile-menu .discord-btn {
-            width: 100%;
-            justify-content: center;
-            padding: 12px 16px;
-            margin-top: 8px;
-        }
-
-        .mobile-menu .separator {
-            width: 100%;
-            height: 1px;
-            margin: 8px 0;
-        }
-
-        @media (max-width: 720px) {
-            .nav-links, .discord-btn {
-                display: none;
-            }
-            .menu-toggle {
-                display: block;
-            }
-        }
-
-        /* ===== СТРАНИЦЫ ===== */
-        .page {
-            width: 100%;
-            max-width: min(1000px, 90vw);
-            flex: 1;
-            display: none;
-            flex-direction: column;
-            padding: clamp(20px, 5vh, 40px) 0 40px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .page.active {
-            display: flex;
-        }
-
-        #page-home {
-            justify-content: center;
+            animation: 
+                fadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards,
+                spinTwoLoops 2.4s ease-in-out 0.8s infinite;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            to { opacity: 1; }
+        }
+        @keyframes spinTwoLoops {
+            0%   { transform: rotate(0deg); }
+            10%  { transform: rotate(0deg); }
+            90%  { transform: rotate(720deg); }
+            100% { transform: rotate(720deg); }
         }
 
-        /* ===== ГЛАВНАЯ (hero) ===== */
-        .hero-content {
-            max-width: 800px;
-            width: 100%;
+        /* === НИЖНЯЯ ПАНЕЛЬ === */
+        .bottom-bar {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: auto;
+            opacity: 0;
+            animation: fadeIn 1.2s ease 0.8s forwards;
         }
 
-        .hero-title {
-            font-size: clamp(36px, 10vw, 72px);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #ffffff 0%, #b8b8ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.3em;
-            text-shadow: 0 4px 30px rgba(88, 101, 242, 0.4);
-            word-break: break-word;
+        .top-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .hero-subtitle {
-            font-size: clamp(18px, 5vw, 28px);
+        .message-box {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            height: 48px;
+            padding: 0 22px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 16px;
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 1.5em;
             letter-spacing: 0.3px;
-            border-left: 4px solid #5865F2;
-            padding-left: clamp(16px, 4vw, 24px);
-            line-height: 1.4;
-            word-break: break-word;
+            user-select: none;
+            white-space: nowrap;
+            box-sizing: border-box;
         }
-
-        .hero-button {
+        .warning-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(145deg, #5865F2, #3f4ad6);
-            color: white;
-            font-size: clamp(18px, 4vw, 22px);
-            font-weight: 600;
-            padding: clamp(14px, 3vw, 18px) clamp(32px, 8vw, 52px);
-            border-radius: 80px;
-            text-decoration: none;
-            box-shadow: 0 25px 40px -12px #5865F2;
-            transition: all 0.25s ease;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            letter-spacing: 0.5px;
-            gap: clamp(8px, 2vw, 12px);
-            backdrop-filter: blur(4px);
-            white-space: nowrap;
-        }
-
-        .hero-button i {
-            font-size: 1.2em;
-            transition: transform 0.2s;
-        }
-
-        .hero-button:hover {
-            background: linear-gradient(145deg, #4752c4, #353fad);
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 32px 48px -10px #5865F2;
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        .hero-button:hover i {
-            transform: translateX(6px);
-        }
-
-        /* ===== ОБЩИЙ СТИЛЬ ДЛЯ СТРАНИЦ С ПРАВИЛАМИ ===== */
-        .rules-container {
-            background: rgba(15, 17, 22, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: clamp(24px, 5vw, 32px);
-            padding: clamp(20px, 5vw, 40px);
-            box-shadow: 0 30px 40px -20px black;
-            width: 100%;
-        }
-
-        .rules-header {
-            text-align: center;
-            margin-bottom: clamp(20px, 5vh, 40px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: clamp(15px, 4vh, 30px);
-        }
-
-        .rules-title {
-            font-size: clamp(32px, 8vw, 48px);
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, #a0a0ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            line-height: 1.1;
-            word-break: break-word;
-        }
-
-        .rules-subtitle {
-            font-size: clamp(18px, 4vw, 24px);
-            font-weight: 400;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 15px;
-        }
-
-        .rules-content {
-            color: rgba(255,255,255,0.9);
-            font-size: clamp(15px, 3.5vw, 18px);
-            line-height: 1.6;
-        }
-
-        .rules-content ol {
-            list-style: none;
-            counter-reset: item;
-            padding-left: 0;
-        }
-        .rules-content li {
-            counter-increment: item;
-            margin-bottom: 12px;
-            padding-left: 30px;
-            position: relative;
-            word-break: break-word;
-        }
-        .rules-content li::before {
-            content: counter(item) ".";
-            position: absolute;
-            left: 0;
-            color: #5865F2;
-            font-weight: 600;
-        }
-        .rules-content li ol {
-            margin-top: 8px;
-            margin-bottom: 8px;
-            counter-reset: subitem;
-            padding-left: 20px;
-        }
-        .rules-content li ol li {
-            counter-increment: subitem;
-            padding-left: 30px;
-        }
-        .rules-content li ol li::before {
-            content: counter(item) "." counter(subitem) ".";
-            color: #8a9cff;
-        }
-
-        .promo-list {
-            list-style: none;
-            padding: 0;
-        }
-        .promo-list li {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: baseline;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .promo-list li::before {
-            content: "•";
-            color: #5865F2;
-            font-weight: bold;
-            font-size: 1.6em;
+            font-size: 24px;
+            color: #e53e3e;
+            flex-shrink: 0;
             line-height: 1;
-            margin-right: 15px;
-            align-self: flex-start;
         }
-        .promo-list li strong {
-            color: #8a9cff;
-            font-weight: 600;
-            min-width: 140px;
+        .message-text {
             flex-shrink: 0;
         }
-        .promo-list li span {
-            flex: 1;
-            color: rgba(255,255,255,0.9);
-        }
-        @media (max-width: 500px) {
-            .promo-list li {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .promo-list li::before {
-                margin-right: 0;
-                margin-bottom: 5px;
-            }
-            .promo-list li strong {
-                min-width: auto;
-            }
-        }
 
-        .rules-note {
-            margin-top: 40px;
-            padding: clamp(15px, 4vw, 20px) clamp(20px, 5vw, 30px);
-            background: rgba(88,101,242,0.1);
-            border-radius: 20px;
-            border-left: 4px solid #5865F2;
-            font-style: italic;
-            color: rgba(255,255,255,0.8);
-            font-size: 0.95em;
-        }
-
-        .back-link {
-            margin-top: 30px;
-            text-align: right;
-        }
-        .back-link a {
-            color: #5865F2;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.2s;
+        .info-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-size: clamp(14px, 3.5vw, 16px);
-        }
-        .back-link a:hover {
-            opacity: 0.7;
-        }
-
-        /* ===== СТРАНИЦА ДРЕСС-КОДА ===== */
-        .dresscode-container {
-            background: rgba(15, 17, 22, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: clamp(24px, 5vw, 32px);
-            padding: clamp(20px, 5vw, 40px);
-            box-shadow: 0 30px 40px -20px black;
-            width: 100%;
-        }
-
-        .dresscode-header {
-            text-align: center;
-            margin-bottom: clamp(20px, 5vh, 40px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: clamp(15px, 4vh, 30px);
-        }
-
-        .dresscode-title {
-            font-size: clamp(32px, 8vw, 48px);
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, #a0a0ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            line-height: 1.1;
-            word-break: break-word;
-        }
-
-        .dresscode-content {
-            color: rgba(255,255,255,0.9);
-            font-size: clamp(16px, 3.5vw, 18px);
-            line-height: 1.7;
-        }
-
-        .dresscode-content p {
-            margin-bottom: 20px;
-        }
-
-        .dresscode-images {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
             justify-content: center;
-            margin-top: 30px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.3s ease, border-color 0.3s ease;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .info-btn:hover {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
-        .dresscode-image {
-            flex: 1;
-            min-width: 250px;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .dresscode-image img {
+        /* === ДОПОЛНИТЕЛЬНАЯ ПАНЕЛЬ === */
+        .extra-panel {
             width: 100%;
-            height: auto;
-            border-radius: 20px;
-            border: 2px solid rgba(88, 101, 242, 0.5);
-            box-shadow: 0 10px 25px -5px black;
-            transition: transform 0.2s;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        padding 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        margin-top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 22px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            box-sizing: border-box;
+            margin-top: 0;
+            min-width: 0;
         }
-
-        .dresscode-image img:hover {
-            transform: scale(1.02);
-            border-color: #5865F2;
-        }
-
-        .dresscode-image p {
+        .bottom-bar.active .extra-panel {
+            max-height: 300px;
+            opacity: 1;
+            padding: 18px 22px;
             margin-top: 10px;
+        }
+
+        .extra-content {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .extra-text {
+            color: rgba(255, 255, 255, 0.85);
             font-size: 14px;
-            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+            letter-spacing: 0.2px;
         }
 
-        @media (max-width: 700px) {
-            .dresscode-images {
-                flex-direction: column;
-                align-items: center;
-            }
-            .dresscode-image {
-                max-width: 100%;
-            }
+        .extra-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* ===== ФУТЕР ===== */
-        .site-footer {
-            width: 100%;
-            max-width: min(1000px, 90vw);
-            padding: 20px 0 30px;
-            text-align: right;
-            color: rgba(255, 255, 255, 0.18);
-            font-size: clamp(11px, 3vw, 13px);
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
-            margin-top: 10px;
-            letter-spacing: 0.5px;
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #27A5E7;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 0 18px;
+            height: 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+            min-width: 0;
         }
-        .site-footer span {
-            background: rgba(255,255,255,0.02);
-            padding: 4px 12px;
-            border-radius: 40px;
-            display: inline-block;
+        .telegram-btn:hover {
+            opacity: 0.85;
+        }
+        .telegram-btn i {
+            font-size: 18px;
+            color: #fff;
         }
 
-        .glow-1 {
-            position: fixed;
-            width: min(400px, 50vw);
-            height: min(400px, 50vw);
-            background: rgba(88, 101, 242, 0.03);
-            border-radius: 50%;
-            filter: blur(120px);
-            bottom: -100px;
-            right: -100px;
-            z-index: -1;
+        .close-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease, border-color 0.3s ease;
+            flex-shrink: 0;
+        }
+        .close-btn:hover {
+            color: #e53e3e;
+            border-color: rgba(229, 62, 62, 0.3);
+        }
+
+        /* === ПОДСКАЗКА === */
+        .tooltip {
+            position: absolute;
+            left: calc(100% + 14px);
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            padding: 10px 20px;
+            font-size: 15px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
             pointer-events: none;
+            z-index: 10;
         }
-        .glow-2 {
-            position: fixed;
-            width: min(500px, 60vw);
-            height: min(500px, 60vw);
-            background: rgba(20, 30, 70, 0.05);
-            border-radius: 50%;
-            filter: blur(140px);
-            top: -200px;
-            left: -100px;
-            z-index: -1;
-            pointer-events: none;
+        .tooltip::before { display: none; }
+        .tooltip.show {
+            opacity: 1;
+            visibility: visible;
         }
 
-        @media (min-width: 1400px) {
-            .dynamic-island,
-            .page,
-            .site-footer {
-                max-width: 1200px;
+        /* === АДАПТИВ === */
+        @media (max-width: 480px) {
+            .bottom-bar {
+                bottom: 10px;
             }
-        }
-
-        @media (max-width: 360px) {
-            .nav-btn {
-                padding: 4px 8px;
+            .top-row {
+                gap: 6px;
+            }
+            .message-box {
+                height: 38px;
+                padding: 0 14px;
+                font-size: 13px;
+                gap: 8px;
+                border-radius: 8px;
+                white-space: normal;
+                max-width: 70%;
+            }
+            .warning-icon {
+                font-size: 18px;
+            }
+            .info-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 17px;
+                border-radius: 8px;
+            }
+            .extra-panel {
+                padding: 0 14px;
+                border-radius: 8px;
+            }
+            .bottom-bar.active .extra-panel {
+                padding: 14px 14px;
+                max-height: 350px;
+                margin-top: 6px;
+            }
+            .extra-text {
+                font-size: 13px;
+            }
+            .telegram-btn {
                 font-size: 12px;
+                padding: 0 14px;
+                height: 34px;
+                border-radius: 8px;
             }
-            .discord-btn span {
-                display: none;
-            }
-            .discord-btn {
-                padding: 8px 12px;
-            }
-            .hero-button {
-                padding: 12px 24px;
+            .telegram-btn i {
                 font-size: 16px;
             }
-        }
-
-        @media (min-height: 800px) {
-            #page-home {
-                justify-content: center;
+            .close-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 16px;
+                border-radius: 8px;
+            }
+            .tooltip {
+                font-size: 12px;
+                padding: 6px 12px;
+                left: calc(100% + 8px);
+                border-radius: 8px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="glow-1"></div>
-    <div class="glow-2"></div>
+    <div class="loader-ring"></div>
 
-    <!-- Dynamic Island -->
-    <div class="dynamic-island">
-        <div class="logo" id="logo-home">
-            <a href="#/" title="На главную">
-                <img src="icon.png" alt="TATARSTAN FAMILY" onerror="this.src='https://via.placeholder.com/34x34/18181b/aaaaaa?text=TF';">
-            </a>
-        </div>
-        <div class="nav-links">
-            <a href="#/fc" class="nav-btn" id="btn-charter">
-                <span class="btn-text">
-                    <span class="short-text">С/У</span>
-                    <span class="full-text">Семейный Устав</span>
-                </span>
-            </a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk07YXrruc-KZCXk7lFtBd8umLcR_NowE0db_HzxTtKp6mQg/viewform?usp=publish-editor" 
-               class="nav-btn regular" target="_blank" rel="noopener noreferrer">
-                <span class="btn-text">Заявка</span>
-            </a>
-            <a href="#/ps" class="nav-btn" id="btn-promotion">
-                <span class="btn-text">
-                    <span class="short-text">С/П</span>
-                    <span class="full-text">Система Повышений</span>
-                </span>
-            </a>
-            <div class="separator"></div>
-            <a href="#/dc" class="nav-btn" id="btn-dresscode">
-                <span class="btn-text">
-                    <span class="short-text">Д/К</span>
-                    <span class="full-text">Дресс Код</span>
-                </span>
-            </a>
-        </div>
-        <a href="https://discord.gg/qjHRYMbHnk" class="discord-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-discord"></i>
-            <span>discord</span>
-        </a>
-
-        <button class="menu-toggle" id="menuToggle">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="#/fc" class="nav-btn" id="mobile-btn-charter">
-                <span class="btn-text">
-                    <span class="short-text">С/У</span>
-                    <span class="full-text">Семейный Устав</span>
-                </span>
-            </a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk07YXrruc-KZCXk7lFtBd8umLcR_NowE0db_HzxTtKp6mQg/viewform?usp=publish-editor" 
-               class="nav-btn regular" target="_blank" rel="noopener noreferrer">
-                <span class="btn-text">Заявка</span>
-            </a>
-            <a href="#/ps" class="nav-btn" id="mobile-btn-promotion">
-                <span class="btn-text">
-                    <span class="short-text">С/П</span>
-                    <span class="full-text">Система Повышений</span>
-                </span>
-            </a>
-            <div class="separator"></div>
-            <a href="#/dc" class="nav-btn" id="mobile-btn-dresscode">
-                <span class="btn-text">
-                    <span class="short-text">Д/К</span>
-                    <span class="full-text">Дресс Код</span>
-                </span>
-            </a>
-            <a href="https://discord.gg/qjHRYMbHnk" class="discord-btn" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-discord"></i>
-                <span>discord</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- Страница: Главная (/) -->
-    <div id="page-home" class="page active">
-        <div class="hero-content">
-            <h1 class="hero-title">TATARSTAN FAMILY<br>— Лучшая фама на RMRP!</h1>
-            <div class="hero-subtitle">Сервер RMRP АРБАТ.</div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk07YXrruc-KZCXk7lFtBd8umLcR_NowE0db_HzxTtKp6mQg/viewform?usp=publish-editor" 
-               class="hero-button" target="_blank" rel="noopener noreferrer">
-                <span>Заявка</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-    </div>
-
-    <!-- Страница: Семейный Устав (/fc) -->
-    <div id="page-charter" class="page">
-        <div class="rules-container">
-            <div class="rules-header">
-                <div style="font-size: clamp(12px, 3vw, 14px); color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">УТВЕРЖДЕН</div>
-                <div style="font-size: clamp(12px, 3vw, 14px); color: rgba(255,255,255,0.4); margin-bottom: 5px;">решением общего собрания семьи "TATARSTAN"</div>
-                <div style="font-size: clamp(12px, 3vw, 14px); color: rgba(255,255,255,0.4); margin-bottom: 20px;">Протокол № 1 от 28.02.2026г.</div>
-                <h1 class="rules-title">УСТАВ</h1>
-                <div class="rules-subtitle">Общества с полной ответственностью "TATARSTAN"</div>
-                <div style="font-size: clamp(14px, 3.5vw, 16px); color: rgba(255,255,255,0.3);">Г. Москва · 2026 год</div>
+    <div class="bottom-bar" id="bottomBar">
+        <div class="top-row" id="topRow">
+            <div class="message-box">
+                <span class="warning-icon"><i class="fas fa-circle-exclamation"></i></span>
+                <span class="message-text">Извините, сайт в разработке.</span>
             </div>
-            <div class="rules-content">
-                <ol>
-                    <li>разглашение личной информации (имена, места работы, местоположение и т.д., так-же оос информации) участников, а так-же чатов посторонним лицам, без ведома руководства — <span style="color:#ffaa70;">[выговор / исключение]</span></li>
-                    <li>оскорбления участников — <span style="color:#ffaa70;">[предупреждение / выговор]</span>
-                        <ol>
-                            <li>многократные оскорбления в адрес членов семьи — <span style="color:#ffaa70;">[исключение с чата фамы / тг]</span>, повторные действия — исключение</li>
-                        </ol>
-                    </li>
-                    <li>спам / капс в чат — <span style="color:#ffaa70;">[предупреждение]</span></li>
-                    <li>помеха участникам:
-                        <ol>
-                            <li>умышленный наезд — <span style="color:#ffaa70;">[предупреждение / далее выговор]</span></li>
-                            <li>помеха игроком — <span style="color:#ffaa70;">[предупреждение / далее выговор]</span></li>
-                            <li>помеха чатом — <span style="color:#ffaa70;">[предупреждение / далее выговор]</span></li>
-                        </ol>
-                    </li>
-                    <li>убийство участника — <span style="color:#ffaa70;">[выговор / исключение]</span>
-                        <ol>
-                            <li>убийство стороннего игрока без причины (dm) — <span style="color:#ffaa70;">[предупреждение / далее выговор]</span></li>
-                        </ol>
-                    </li>
-                    <li>провокация сторонних игроков на оскорбления/стрельбу — <span style="color:#ffaa70;">[предупреждение / выговор]</span></li>
-                    <li>если игрок получил warn, ban являясь участником основного состава — <span style="color:#ffaa70;">[вынесение наказания согласовывается советом путём голосования]</span></li>
-                    <li>если игрок получил warn, ban не являясь участником основного состава — <span style="color:#ffaa70;">[на усмотрение лидера]</span></li>
-                    <li>использование вредоносных программ:
-                        <ol>
-                            <li>с целью получения преимущества над игроками сервера (прим. wallhack, speedhack) — <span style="color:#ffaa70;">[предупреждение]</span></li>
-                            <li>с целью нанесения вреда игрокам сервера (прим. aim, rapid fire) — <span style="color:#ffaa70;">[выговор / исключение]</span></li>
-                        </ol>
-                    </li>
-                    <li>обман/клевета участников — <span style="color:#ffaa70;">[2 выговора]</span></li>
-                    <li>намеренное разжигание конфликта — <span style="color:#ffaa70;">[предупреждение / выговор]</span></li>
-                    <li>помощь участникам «latarstan» если имеется возможность, так же:
-                        <ol>
-                            <li>для игроков состоящих во фракциях: если действия организации в которой вы состоите направлены на нанесение вреда в любом виде участнику семьи «latarstan» вы не должны содействовать, либо-же предупредить участника семьи в рационе.</li>
-                        </ol>
-                    </li>
-                    <li>с и оос конфликты с игроками/фракциями, повлекшие за собой негативное отношение к семье — <span style="color:#ffaa70;">[выговор / исключение]</span></li>
-                </ol>
-                <div class="rules-note">
-                    <i class="fas fa-gavel" style="margin-right: 10px;"></i> Наказания применяются согласно степени тяжести нарушения и решения совета.
+            <button class="info-btn" id="infoBtn">
+                <i class="fas fa-circle-info"></i>
+            </button>
+            <div class="tooltip" id="tooltip">Раскрыть информацию.</div>
+        </div>
+
+        <div class="extra-panel" id="extraPanel">
+            <div class="extra-content">
+                <div class="extra-text">
+                    Дополнительную информацию о разработке нашего музыкального проекта вы сможете найти у нас в Telegram канале.
+                </div>
+                <div class="extra-actions">
+                    <a href="https://t.me/nnmusicsite" class="telegram-btn" target="_blank">
+                        <i class="fab fa-telegram-plane"></i> TG: Channel
+                    </a>
+                    <button class="close-btn" id="closeExtra">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
             </div>
-            <div class="back-link">
-                <a href="#/"><i class="fas fa-arrow-left"></i> Вернуться на главную</a>
-            </div>
         </div>
     </div>
-
-    <!-- Страница: Система Повышений (/ps) -->
-    <div id="page-promotion" class="page">
-        <div class="rules-container">
-            <div class="rules-header">
-                <h1 class="rules-title">СИСТЕМА ПОВЫШЕНИЙ</h1>
-                <div class="rules-subtitle">TATARSTAN FAMILY</div>
-            </div>
-            <div class="rules-content">
-                <ul class="promo-list">
-                    <li><strong>Малай → Пацан</strong> <span>ﾠСдать семейный устав Лидеру либо Гл. Заместителям, раскидать 5 раскладок</span></li>
-                    <li><strong>Пацан → Буре</strong> <span>раскидать 10 раскладок. Положить в семейный «общак» : 20.000₽</span></li>
-                    <li><strong>Буре → Торпеда</strong> <span>ﾠраскидать 20 раскладок. Присутствовать на одном ограблении. Положить в семейный «общак» : 30.000₽</span></li>
-                    <li><strong>Торпеда → Свояк</strong> <span>ﾠраскидать 30 раскладок. Быть на 5 ограблениях. Положить в семейный «общак» : 50.000₽</span></li>
-                    <li><strong>Свояк → Татарин</strong> <span>ﾠПрисутствовать на 10 ограблениях. Положить в семейный «общак» : 100.000₽</span></li>
-                    <li><strong>Татарин → Абый</strong> <span>ﾠНа усмотрение Лидера</span></li>
-                </ul>
-                <div class="rules-note">
-                    <i class="fas fa-arrow-up" style="margin-right: 10px;"></i> Повышение ступени возможно только после выполнения всех условий текущей.
-                </div>
-            </div>
-            <div class="back-link">
-                <a href="#/"><i class="fas fa-arrow-left"></i> Вернуться на главную</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Страница: Дресс Код (/dc) -->
-    <div id="page-dresscode" class="page">
-        <div class="dresscode-container">
-            <div class="dresscode-header">
-                <h1 class="dresscode-title">ДРЕСС КОД</h1>
-                <div class="rules-subtitle">TATARSTAN FAMILY</div>
-            </div>
-            <div class="dresscode-content">
-                <p><strong style="color: #8a9cff;">Дресс Код:</strong> Наша семья официально зарегистрирована (17.03.2026). После этого события у нас появился обязательный дресс код! Одежда синяя, найти пример можете чуть ниже на картинке. Так-же нужно поменять цвет машины на 1,0,30 - пример тоже ниже!</p>
-                
-                <div class="dresscode-images">
-                    <div class="dresscode-image">
-                        <img src="dresscode.png" alt="Пример одежды (синий цвет)" onerror="this.src='https://via.placeholder.com/400x300/2a2a3a/ffffff?text=Одежда+синяя'; this.style.border='1px solid #5865F2';">
-                        <p>Пример синей одежды</p>
-                    </div>
-                    <div class="dresscode-image">
-                        <img src="dresscodecar.png" alt="Пример цвета машины 1,0,30" onerror="this.src='https://via.placeholder.com/400x300/1a1a2a/8a9cff?text=Цвет+машины+1,0,30'; this.style.border='1px solid #5865F2';">
-                        <p>Цвет машины: 1, 0, 30</p>
-                    </div>
-                </div>
-            </div>
-            <div class="back-link" style="margin-top: 30px;">
-                <a href="#/"><i class="fas fa-arrow-left"></i> Вернуться на главную</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Футер -->
-    <footer class="site-footer">
-        <span>© 2026 TATARSTAN FAMILY · без cookies</span>
-    </footer>
 
     <script>
-        // Роутинг на основе хэша
-        const homePage = document.getElementById('page-home');
-        const charterPage = document.getElementById('page-charter');
-        const promoPage = document.getElementById('page-promotion');
-        const dresscodePage = document.getElementById('page-dresscode');
-
-        function showPageFromHash() {
-            const hash = window.location.hash.substring(1) || '/';
-            if (hash === '/') {
-                homePage.classList.add('active');
-                charterPage.classList.remove('active');
-                promoPage.classList.remove('active');
-                dresscodePage.classList.remove('active');
-            } else if (hash === '/fc') {
-                charterPage.classList.add('active');
-                homePage.classList.remove('active');
-                promoPage.classList.remove('active');
-                dresscodePage.classList.remove('active');
-            } else if (hash === '/ps') {
-                promoPage.classList.add('active');
-                homePage.classList.remove('active');
-                charterPage.classList.remove('active');
-                dresscodePage.classList.remove('active');
-            } else if (hash === '/dc') {
-                dresscodePage.classList.add('active');
-                homePage.classList.remove('active');
-                charterPage.classList.remove('active');
-                promoPage.classList.remove('active');
-            } else {
-                window.location.hash = '#/';
-            }
-        }
-
-        window.addEventListener('hashchange', showPageFromHash);
-        window.addEventListener('load', () => {
-            if (!window.location.hash || !['#/', '#/fc', '#/ps', '#/dc'].includes(window.location.hash)) {
-                window.location.hash = '#/';
-            } else {
-                showPageFromHash();
-            }
-        });
-
-        // Мобильное меню
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            mobileMenu.classList.toggle('show');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.remove('show');
-            }
-        });
-
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('show');
+        (function() {
+            // === ПОЛНЫЙ ЗАПРЕТ НА СОХРАНЕНИЕ COOKIE ===
+            // 1. Удаляем все существующие cookie
+            document.cookie.split(';').forEach(function(c) {
+                document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
             });
-        });
 
-        document.querySelector('.logo').addEventListener('click', () => {
-            mobileMenu.classList.remove('show');
-        });
+            // 2. Блокируем запись новых cookie через document.cookie
+            Object.defineProperty(document, 'cookie', {
+                get: function() { return ''; },
+                set: function(value) {
+                    console.warn('Установка cookie заблокирована на этой странице');
+                },
+                configurable: false
+            });
+
+            console.log('Cookie полностью заблокированы на этой странице.');
+
+            // === ОСНОВНАЯ ЛОГИКА ===
+            const infoBtn = document.getElementById('infoBtn');
+            const closeBtn = document.getElementById('closeExtra');
+            const bottomBar = document.getElementById('bottomBar');
+            const topRow = document.getElementById('topRow');
+            const extraPanel = document.getElementById('extraPanel');
+            const tooltip = document.getElementById('tooltip');
+
+            let timer = null;
+            let isOpen = false;
+
+            // ---- Синхронизация ширины панели с верхним рядом ----
+            function syncWidth() {
+                if (topRow && extraPanel) {
+                    const width = topRow.offsetWidth;
+                    extraPanel.style.width = width + 'px';
+                }
+            }
+
+            window.addEventListener('load', syncWidth);
+            window.addEventListener('resize', syncWidth);
+
+            // ---- Подсказка при наведении (через 2 секунды) ----
+            function showTooltip() {
+                tooltip.classList.add('show');
+            }
+            function hideTooltip() {
+                if (timer) {
+                    clearTimeout(timer);
+                    timer = null;
+                }
+                tooltip.classList.remove('show');
+            }
+
+            infoBtn.addEventListener('mouseenter', () => {
+                timer = setTimeout(showTooltip, 2000);
+            });
+            infoBtn.addEventListener('mouseleave', hideTooltip);
+
+            // ---- Переключение панели (открыть/закрыть) ----
+            function togglePanel(open) {
+                if (open === undefined) {
+                    isOpen = !isOpen;
+                } else {
+                    isOpen = open;
+                }
+                if (isOpen) {
+                    bottomBar.classList.add('active');
+                    syncWidth();           // обновляем ширину при открытии
+                    hideTooltip();
+                } else {
+                    bottomBar.classList.remove('active');
+                }
+            }
+
+            // Клик по кнопке Info
+            infoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                togglePanel();
+            });
+
+            // Клик по крестику
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (isOpen) togglePanel(false);
+            });
+
+            // При ресайзе, если панель открыта, обновляем ширину
+            window.addEventListener('resize', () => {
+                if (isOpen) {
+                    syncWidth();
+                }
+            });
+        })();
     </script>
 </body>
 </html>
