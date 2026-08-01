@@ -56,7 +56,7 @@
             line-height: 1;
             display: flex;
             align-items: center;
-            height: 28px;
+            transform: translateY(1px);  /* небольшой сдвиг вниз для выравнивания */
         }
 
         .header-link {
@@ -69,7 +69,7 @@
             line-height: 1;
             display: flex;
             align-items: center;
-            height: 28px;
+            transform: translateY(1px);  /* такой же сдвиг */
         }
         .header-link:hover {
             color: #27A5E7;
@@ -290,8 +290,8 @@
         @media (max-width: 992px) {
             .header { top: 16px; left: 16px; gap: 8px; font-size: 15px; }
             .header-logo { height: 24px; }
-            .header-divider { font-size: 16px; height: 24px; }
-            .header-link { font-size: 15px; height: 24px; }
+            .header-divider { font-size: 16px; transform: translateY(1px); }
+            .header-link { font-size: 15px; transform: translateY(1px); }
             .bottom-bar { bottom: 12px; }
             .message-box { height: 44px; font-size: 14px; padding: 0 18px; gap: 10px; }
             .warning-icon { font-size: 20px; }
@@ -308,8 +308,8 @@
         @media (max-width: 768px) {
             .header { top: 14px; left: 14px; gap: 6px; font-size: 14px; }
             .header-logo { height: 20px; }
-            .header-divider { font-size: 14px; height: 20px; }
-            .header-link { font-size: 14px; height: 20px; }
+            .header-divider { font-size: 14px; transform: translateY(1px); }
+            .header-link { font-size: 14px; transform: translateY(1px); }
             .bottom-bar { bottom: 10px; }
             .top-row { gap: 8px; }
             .message-box { height: 40px; font-size: 13px; padding: 0 16px; gap: 8px; border-radius: 10px; white-space: normal; max-width: 70%; }
@@ -327,8 +327,8 @@
         @media (max-width: 480px) {
             .header { top: 12px; left: 12px; gap: 6px; font-size: 13px; }
             .header-logo { height: 18px; }
-            .header-divider { font-size: 13px; height: 18px; }
-            .header-link { font-size: 13px; height: 18px; }
+            .header-divider { font-size: 13px; transform: translateY(1px); }
+            .header-link { font-size: 13px; transform: translateY(1px); }
             .bottom-bar { bottom: 8px; }
             .top-row { gap: 6px; }
             .message-box { height: 36px; font-size: 12px; padding: 0 12px; gap: 6px; border-radius: 8px; max-width: 65%; }
