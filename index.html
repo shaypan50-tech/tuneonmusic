@@ -37,13 +37,16 @@
             z-index: 999;
             user-select: none;
             font-size: 16px;
+            opacity: 0;
+            animation: fadeIn 1.2s ease 0.8s forwards;
         }
 
         .header-logo {
-            height: 28px;              /* уменьшили */
+            height: 28px;
             width: auto;
             display: block;
-            flex-shrink: 0;            /* чтобы не сжимался */
+            flex-shrink: 0;
+            vertical-align: middle;
         }
 
         .header-divider {
@@ -51,6 +54,9 @@
             font-weight: 300;
             font-size: 18px;
             line-height: 1;
+            display: flex;
+            align-items: center;
+            height: 28px;
         }
 
         .header-link {
@@ -60,6 +66,10 @@
             font-size: 16px;
             transition: color 0.3s ease;
             letter-spacing: 0.2px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            height: 28px;
         }
         .header-link:hover {
             color: #27A5E7;
@@ -179,9 +189,7 @@
             z-index: 9999;
             will-change: transform, opacity;
         }
-        .tooltip::before {
-            display: none;
-        }
+        .tooltip::before { display: none; }
         .tooltip.show {
             opacity: 1;
             visibility: visible;
@@ -222,7 +230,6 @@
             line-height: 1.5;
             letter-spacing: 0.2px;
         }
-
         .extra-actions {
             display: flex;
             align-items: center;
@@ -273,42 +280,68 @@
             border-color: rgba(229, 62, 62, 0.3);
         }
 
-        @media (max-width: 480px) {
-            .header {
-                top: 12px;
-                left: 16px;
-                gap: 6px;
-                font-size: 14px;
-            }
-            .header-logo {
-                height: 20px;            /* меньше на мобильных */
-            }
-            .header-divider {
-                font-size: 16px;
-            }
-            .header-link {
-                font-size: 14px;
-            }
-            .bottom-bar { bottom: 10px; }
-            .top-row { gap: 6px; }
-            .message-box {
-                height: 38px;
-                padding: 0 14px;
-                font-size: 13px;
-                gap: 8px;
-                border-radius: 8px;
-                white-space: normal;
-                max-width: 70%;
-            }
-            .warning-icon { font-size: 18px; }
-            .info-btn { width: 38px; height: 38px; font-size: 17px; border-radius: 8px; }
-            .extra-panel { padding: 0 14px; border-radius: 8px; }
-            .bottom-bar.active .extra-panel { padding: 14px 14px; max-height: 350px; margin-top: 6px; }
+        /* === АДАПТИВНОСТЬ === */
+        @media (max-width: 1200px) {
+            .header { left: 20px; gap: 8px; }
+            .message-box { height: 46px; font-size: 15px; padding: 0 20px; }
+            .info-btn { width: 46px; height: 46px; font-size: 20px; }
+        }
+
+        @media (max-width: 992px) {
+            .header { top: 16px; left: 16px; gap: 8px; font-size: 15px; }
+            .header-logo { height: 24px; }
+            .header-divider { font-size: 16px; height: 24px; }
+            .header-link { font-size: 15px; height: 24px; }
+            .bottom-bar { bottom: 12px; }
+            .message-box { height: 44px; font-size: 14px; padding: 0 18px; gap: 10px; }
+            .warning-icon { font-size: 20px; }
+            .info-btn { width: 44px; height: 44px; font-size: 18px; }
+            .extra-panel { padding: 0 18px; border-radius: 10px; }
+            .bottom-bar.active .extra-panel { padding: 16px 18px; margin-top: 8px; }
             .extra-text { font-size: 13px; }
-            .telegram-btn { font-size: 12px; padding: 0 14px; height: 34px; border-radius: 8px; }
+            .telegram-btn { height: 36px; font-size: 13px; padding: 0 14px; }
             .telegram-btn i { font-size: 16px; }
+            .close-btn { width: 36px; height: 36px; font-size: 18px; }
+            .tooltip { font-size: 14px; padding: 8px 16px; }
+        }
+
+        @media (max-width: 768px) {
+            .header { top: 14px; left: 14px; gap: 6px; font-size: 14px; }
+            .header-logo { height: 20px; }
+            .header-divider { font-size: 14px; height: 20px; }
+            .header-link { font-size: 14px; height: 20px; }
+            .bottom-bar { bottom: 10px; }
+            .top-row { gap: 8px; }
+            .message-box { height: 40px; font-size: 13px; padding: 0 16px; gap: 8px; border-radius: 10px; white-space: normal; max-width: 70%; }
+            .warning-icon { font-size: 18px; }
+            .info-btn { width: 40px; height: 40px; font-size: 17px; border-radius: 10px; }
+            .extra-panel { padding: 0 16px; border-radius: 10px; }
+            .bottom-bar.active .extra-panel { padding: 14px 16px; margin-top: 6px; max-height: 350px; }
+            .extra-text { font-size: 12px; }
+            .telegram-btn { height: 34px; font-size: 12px; padding: 0 12px; border-radius: 8px; }
+            .telegram-btn i { font-size: 14px; }
             .close-btn { width: 34px; height: 34px; font-size: 16px; border-radius: 8px; }
-            .tooltip { font-size: 12px; padding: 6px 12px; border-radius: 8px; }
+            .tooltip { font-size: 13px; padding: 6px 14px; border-radius: 10px; }
+        }
+
+        @media (max-width: 480px) {
+            .header { top: 12px; left: 12px; gap: 6px; font-size: 13px; }
+            .header-logo { height: 18px; }
+            .header-divider { font-size: 13px; height: 18px; }
+            .header-link { font-size: 13px; height: 18px; }
+            .bottom-bar { bottom: 8px; }
+            .top-row { gap: 6px; }
+            .message-box { height: 36px; font-size: 12px; padding: 0 12px; gap: 6px; border-radius: 8px; max-width: 65%; }
+            .warning-icon { font-size: 16px; }
+            .info-btn { width: 36px; height: 36px; font-size: 15px; border-radius: 8px; }
+            .extra-panel { padding: 0 12px; border-radius: 8px; }
+            .bottom-bar.active .extra-panel { padding: 12px 12px; margin-top: 6px; max-height: 400px; }
+            .extra-text { font-size: 11px; }
+            .extra-actions { gap: 6px; }
+            .telegram-btn { height: 30px; font-size: 11px; padding: 0 10px; border-radius: 6px; }
+            .telegram-btn i { font-size: 13px; }
+            .close-btn { width: 30px; height: 30px; font-size: 14px; border-radius: 6px; }
+            .tooltip { font-size: 12px; padding: 4px 10px; border-radius: 8px; left: calc(100% + 8px) !important; }
         }
     </style>
 </head>
