@@ -26,6 +26,45 @@
             font-family: system-ui, -apple-system, sans-serif;
         }
 
+        /* === ВЕРХНЯЯ ПАНЕЛЬ === */
+        .header {
+            position: fixed;
+            top: 20px;
+            left: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 999;
+            user-select: none;
+            font-size: 16px;
+        }
+
+        .header-logo {
+            height: 36px;
+            width: auto;
+            display: block;
+        }
+
+        .header-divider {
+            color: rgba(255, 255, 255, 0.15);
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .header-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            letter-spacing: 0.2px;
+        }
+        .header-link:hover {
+            color: #27A5E7; /* цвет Telegram */
+        }
+
+        /* === ЗАГРУЗЧИК === */
         .loader-ring {
             width: 32px;
             height: 32px;
@@ -50,6 +89,7 @@
             100% { transform: rotate(720deg); }
         }
 
+        /* === НИЖНЯЯ ПАНЕЛЬ === */
         .bottom-bar {
             position: fixed;
             bottom: 15px;
@@ -233,6 +273,21 @@
         }
 
         @media (max-width: 480px) {
+            .header {
+                top: 12px;
+                left: 16px;
+                gap: 6px;
+                font-size: 14px;
+            }
+            .header-logo {
+                height: 28px;
+            }
+            .header-divider {
+                font-size: 16px;
+            }
+            .header-link {
+                font-size: 14px;
+            }
             .bottom-bar { bottom: 10px; }
             .top-row { gap: 6px; }
             .message-box {
@@ -257,8 +312,18 @@
     </style>
 </head>
 <body>
+
+    <!-- === ВЕРХНИЙ ЛЕВЫЙ УГОЛ === -->
+    <div class="header">
+        <img src="Tuneonfun3.png" alt="tuneon" class="header-logo">
+        <span class="header-divider">|</span>
+        <a href="https://t.me/tuneon_fun" class="header-link" target="_blank">Telegram</a>
+    </div>
+
+    <!-- Загрузчик -->
     <div class="loader-ring"></div>
 
+    <!-- Нижняя панель -->
     <div class="bottom-bar" id="bottomBar">
         <div class="top-row" id="topRow">
             <div class="message-box">
@@ -290,9 +355,8 @@
     <div class="tooltip" id="tooltip">Раскрыть информацию.</div>
 
     <script>
-        // БЛОКИРОВКА COOKIE: удаляем все существующие и запрещаем создание новых
+        // Блокировка COOKIE
         (function blockCookies() {
-            // 1. Удаляем все текущие куки
             document.cookie.split(';').forEach(function(c) {
                 if (c.trim()) {
                     const name = c.split('=')[0].trim();
@@ -300,27 +364,16 @@
                     document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
                 }
             });
-
-            // 2. Переопределяем установку cookie через Object.defineProperty
-            // Запоминаем оригинальный метод (чтобы не вызывать рекурсию)
             const originalCookieDescriptor = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie');
             Object.defineProperty(document, 'cookie', {
-                get: function() {
-                    // Возвращаем пустую строку, чтобы скрыть существующие куки (если они всё же были установлены)
-                    return '';
-                },
-                set: function(value) {
-                    // Ничего не делаем, просто игнорируем запись
-                    // Можно также вывести предупреждение в консоль:
-                    // console.warn('Установка cookie заблокирована:', value);
-                    return;
-                },
+                get: function() { return ''; },
+                set: function(value) { return; },
                 configurable: true,
                 enumerable: true
             });
         })();
 
-        // ---- Остальной скрипт (без изменений) ----
+        // ---- Основная логика (без изменений) ----
         (function() {
             const infoBtn = document.getElementById('infoBtn');
             const closeBtn = document.getElementById('closeExtra');
