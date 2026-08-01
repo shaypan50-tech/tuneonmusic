@@ -49,13 +49,6 @@
             vertical-align: middle;
         }
 
-        /* Fallback, если картинка не загрузится */
-        .header-logo::before {
-            content: "🎵";
-            font-size: 28px;
-            display: none; /* скрыт по умолчанию, показываем только если картинка не загружена */
-        }
-
         .header-divider {
             color: rgba(255, 255, 255, 0.15);
             font-weight: 300;
@@ -63,7 +56,7 @@
             line-height: 1;
             display: flex;
             align-items: center;
-            transform: translateY(1px);
+            transform: translateY(3px);  /* увеличенный сдвиг вниз */
         }
 
         .header-link {
@@ -76,7 +69,7 @@
             line-height: 1;
             display: flex;
             align-items: center;
-            transform: translateY(1px);
+            transform: translateY(3px);  /* такой же сдвиг */
         }
         .header-link:hover {
             color: #27A5E7;
@@ -297,8 +290,8 @@
         @media (max-width: 992px) {
             .header { top: 16px; left: 16px; gap: 8px; font-size: 15px; }
             .header-logo { height: 24px; }
-            .header-divider { font-size: 16px; transform: translateY(1px); }
-            .header-link { font-size: 15px; transform: translateY(1px); }
+            .header-divider { font-size: 16px; transform: translateY(3px); }
+            .header-link { font-size: 15px; transform: translateY(3px); }
             .bottom-bar { bottom: 12px; }
             .message-box { height: 44px; font-size: 14px; padding: 0 18px; gap: 10px; }
             .warning-icon { font-size: 20px; }
@@ -315,8 +308,8 @@
         @media (max-width: 768px) {
             .header { top: 14px; left: 14px; gap: 6px; font-size: 14px; }
             .header-logo { height: 20px; }
-            .header-divider { font-size: 14px; transform: translateY(1px); }
-            .header-link { font-size: 14px; transform: translateY(1px); }
+            .header-divider { font-size: 14px; transform: translateY(3px); }
+            .header-link { font-size: 14px; transform: translateY(3px); }
             .bottom-bar { bottom: 10px; }
             .top-row { gap: 8px; }
             .message-box { height: 40px; font-size: 13px; padding: 0 16px; gap: 8px; border-radius: 10px; white-space: normal; max-width: 70%; }
@@ -334,8 +327,8 @@
         @media (max-width: 480px) {
             .header { top: 12px; left: 12px; gap: 6px; font-size: 13px; }
             .header-logo { height: 18px; }
-            .header-divider { font-size: 13px; transform: translateY(1px); }
-            .header-link { font-size: 13px; transform: translateY(1px); }
+            .header-divider { font-size: 13px; transform: translateY(3px); }
+            .header-link { font-size: 13px; transform: translateY(3px); }
             .bottom-bar { bottom: 8px; }
             .top-row { gap: 6px; }
             .message-box { height: 36px; font-size: 12px; padding: 0 12px; gap: 6px; border-radius: 8px; max-width: 65%; }
@@ -356,7 +349,7 @@
 
     <!-- === ВЕРХНИЙ ЛЕВЫЙ УГОЛ === -->
     <div class="header">
-        <img src="tuneonfun3.png" alt="tuneon" class="header-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <img src="tuneonfun3.png" alt="tuneon" class="header-logo">
         <span class="header-divider">|</span>
         <a href="https://t.me/tuneon_fun" class="header-link" target="_blank">Telegram</a>
     </div>
