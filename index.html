@@ -49,6 +49,13 @@
             vertical-align: middle;
         }
 
+        /* Fallback, если картинка не загрузится */
+        .header-logo::before {
+            content: "🎵";
+            font-size: 28px;
+            display: none; /* скрыт по умолчанию, показываем только если картинка не загружена */
+        }
+
         .header-divider {
             color: rgba(255, 255, 255, 0.15);
             font-weight: 300;
@@ -56,7 +63,7 @@
             line-height: 1;
             display: flex;
             align-items: center;
-            transform: translateY(1px);  /* небольшой сдвиг вниз для выравнивания */
+            transform: translateY(1px);
         }
 
         .header-link {
@@ -69,7 +76,7 @@
             line-height: 1;
             display: flex;
             align-items: center;
-            transform: translateY(1px);  /* такой же сдвиг */
+            transform: translateY(1px);
         }
         .header-link:hover {
             color: #27A5E7;
@@ -349,7 +356,7 @@
 
     <!-- === ВЕРХНИЙ ЛЕВЫЙ УГОЛ === -->
     <div class="header">
-        <img src="Tuneonfun3.png" alt="tuneon" class="header-logo">
+        <img src="tuneonfun3.png" alt="tuneon" class="header-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
         <span class="header-divider">|</span>
         <a href="https://t.me/tuneon_fun" class="header-link" target="_blank">Telegram</a>
     </div>
